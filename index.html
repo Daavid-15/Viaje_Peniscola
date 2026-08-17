@@ -1,0 +1,693 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Peñíscola · 31 agosto – 4 septiembre 2026</title>
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#127182">
+<link rel="apple-touch-icon" href="icon-192.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Peñíscola">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600&family=Archivo+Narrow:wght@500;600&family=Spectral:ital,wght@0,400;1,400;1,500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#E7ECEA; --card:#F7F9F8;
+  --ink:#10303A; --ink-2:#4C6771; --ink-3:#7B9199;
+  --ciudad:#C08A1E; --ciudad-bg:#EADFBB;
+  --ruta:#5F7A3F;   --ruta-bg:#DCE5CC;
+  --agua:#127182;   --agua-bg:#C6E0E2;
+  --gastro:#9A3247;   --gastro-bg:#EFD5DA;
+  --coche:#5A6B72;
+  --line:rgba(16,48,58,.16); --line-2:rgba(16,48,58,.3);
+  --warn:#9A5B12;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:"Archivo",system-ui,-apple-system,sans-serif;font-size:16px;line-height:1.55}
+.wrap{max-width:880px;margin:0 auto;padding:28px 20px 72px}
+
+.mast{border-bottom:1.5px solid var(--line-2);padding-bottom:18px}
+.eyebrow{font-family:"Archivo Narrow",sans-serif;font-weight:600;text-transform:uppercase;letter-spacing:.14em;font-size:12px;color:var(--agua);margin:0 0 6px}
+h1{font-weight:600;font-size:clamp(30px,6vw,44px);line-height:1.05;letter-spacing:-.02em;margin:0}
+h1 em{font-family:"Spectral",Georgia,serif;font-style:italic;font-weight:400}
+.mast-meta{display:flex;flex-wrap:wrap;gap:10px 26px;margin-top:14px;font-family:"Archivo Narrow",sans-serif;font-size:13px;text-transform:uppercase;letter-spacing:.08em;color:var(--ink-2)}
+.mast-meta b{font-weight:600;color:var(--ink)}
+
+.bar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;padding:14px 0 0}
+.btn{appearance:none;cursor:pointer;font-family:"Archivo Narrow",sans-serif;font-weight:600;font-size:13px;text-transform:uppercase;letter-spacing:.09em;padding:8px 14px;border-radius:99px;border:1px solid var(--line-2);background:transparent;color:var(--ink-2)}
+.btn:hover{background:#fff;color:var(--ink)}
+.btn:focus-visible{outline:2px solid var(--agua);outline-offset:2px}
+.btn.on{background:var(--agua);border-color:var(--agua);color:#fff}
+.btn.ghost{border-style:dashed}
+.status{font-size:12.5px;color:var(--ink-3);margin-left:auto;display:flex;align-items:center;gap:6px}
+.status .dot{width:7px;height:7px;border-radius:99px;background:var(--ink-3);flex:none}
+.status.ok .dot{background:var(--ruta)}
+.status.warn .dot{background:var(--warn)}
+.status.busy .dot{background:var(--agua);animation:pulse 1s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+
+.setup{margin-top:16px;padding:16px;border:1px solid var(--line-2);border-radius:8px;background:#fff}
+.setup h3{margin:0 0 6px;font-size:15px;font-weight:600}
+.setup p{margin:0 0 12px;font-size:13.5px;color:var(--ink-2)}
+.vlist{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:6px}
+.vrow{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:9px 12px;border:1px solid var(--line);border-radius:6px;background:var(--paper)}
+.vrow span{font-size:13.5px;color:var(--ink-2)}
+.vrow button{appearance:none;cursor:pointer;border:1px solid var(--agua);background:#fff;color:var(--agua);border-radius:99px;font-family:"Archivo Narrow",sans-serif;font-weight:600;font-size:12px;text-transform:uppercase;letter-spacing:.08em;padding:6px 12px}
+.vrow button:hover{background:var(--agua);color:#fff}
+
+.key{display:flex;flex-wrap:wrap;gap:8px 18px;align-items:center;padding:14px 0 18px;font-size:13px;color:var(--ink-2);border-bottom:1px solid var(--line)}
+.key span{display:inline-flex;align-items:center;gap:7px}
+.key i{width:12px;height:12px;border-radius:3px;display:inline-block;flex:none}
+.sw-ciudad{background:var(--ciudad-bg);border:1px solid var(--ciudad)}
+.sw-ruta{background:var(--ruta-bg);border:1px solid var(--ruta)}
+.sw-agua{background:var(--agua-bg);border:1px solid var(--agua)}
+.sw-gastro{background:var(--gastro-bg);border:1px solid var(--gastro)}
+.sw-coche{background:#fff;border:1px solid var(--coche)}
+.key em{font-family:"Spectral",serif;font-style:italic;color:var(--agua)}
+
+.hint{display:none;margin:16px 0 0;padding:12px 14px;border-left:3px solid var(--agua);background:rgba(198,224,226,.4);border-radius:0 5px 5px 0;font-size:14px}
+body.editing .hint{display:block}
+
+.tabs{display:flex;gap:2px;margin:20px 0 0;overflow-x:auto;scrollbar-width:none}
+.tabs[hidden]{display:none}
+.tabs::-webkit-scrollbar{display:none}
+.tab{flex:1 0 auto;min-width:92px;appearance:none;cursor:pointer;background:transparent;border:1px solid var(--line);border-bottom:none;border-radius:7px 7px 0 0;padding:11px 14px 10px;text-align:left;font-family:"Archivo Narrow",sans-serif;color:var(--ink-2)}
+.tab b{display:block;font-size:15px;font-weight:600;color:inherit}
+.tab small{display:block;font-size:11px;text-transform:uppercase;letter-spacing:.1em;opacity:.75}
+.tab:hover{background:rgba(255,255,255,.55)}
+.tab[aria-selected="true"]{background:var(--card);color:var(--ink);border-color:var(--line-2);box-shadow:inset 0 3px 0 var(--agua)}
+.tab.pool{border-style:dashed}
+.tab:focus-visible{outline:2px solid var(--agua);outline-offset:2px}
+
+.panel{background:var(--card);border:1px solid var(--line-2);border-radius:0 7px 7px 7px;padding:26px 22px 30px}
+.panel[hidden]{display:none}
+
+.dayhead{display:flex;align-items:flex-start;justify-content:space-between;gap:20px}
+.dayhead h2{font-size:24px;font-weight:600;letter-spacing:-.01em;margin:0 0 4px;line-height:1.15}
+.dayhead p{margin:0;color:var(--ink-2);font-size:14.5px;max-width:46ch}
+.sounding{text-align:right;flex:none;font-family:"Archivo Narrow",sans-serif;line-height:1}
+.sounding b{display:block;font-size:34px;font-weight:600;letter-spacing:-.02em}
+.sounding small{font-size:11px;text-transform:uppercase;letter-spacing:.12em;color:var(--ink-3)}
+
+.stops{list-style:none;margin:22px 0 0;padding:0}
+.stop{display:grid;grid-template-columns:76px 1fr;gap:14px;align-items:start;padding:13px 12px 13px 0;border-top:1px solid var(--line)}
+.stop:last-child{border-bottom:1px solid var(--line)}
+.tcol{display:flex;flex-direction:column;gap:2px}
+.stop .t{font-family:"Archivo Narrow",sans-serif;font-weight:600;font-size:15.5px;color:var(--ink-2);padding-top:1px;white-space:nowrap}
+.stop .km{font-family:"Archivo Narrow",sans-serif;font-weight:600;font-size:11px;color:var(--ink-3);min-height:13px;white-space:nowrap}
+.stop .km:not(:empty)::after{content:' km'}
+body.editing .stop .km:empty::before{content:'+ km';opacity:.45}
+.stop .t::before{content:'';display:inline-block;width:9px;height:9px;border-radius:2px;margin-right:7px}
+.stop h3{margin:0 0 3px;font-size:17px;font-weight:600;letter-spacing:-.005em}
+.stop p{margin:0;color:var(--ink-2);font-size:14.5px}
+
+.stop.ciudad .t::before{background:var(--ciudad-bg);border:1px solid var(--ciudad)}
+.stop.ruta   .t::before{background:var(--ruta-bg);border:1px solid var(--ruta)}
+.stop.agua   .t::before{background:var(--agua-bg);border:1px solid var(--agua)}
+.stop.gastro .t::before{background:var(--gastro-bg);border:1px solid var(--gastro)}
+.stop.coche  .t::before{background:#fff;border:1px solid var(--coche)}
+.stop.ruta .t{color:var(--ruta)}
+.stop.coche .t{color:var(--coche)}
+.stop.gastro .t{color:var(--gastro)}
+.stop.gastro h3{font-family:"Spectral",Georgia,serif;font-weight:400;font-size:18px;color:var(--gastro)}
+.stop.ciudad{background:linear-gradient(90deg,var(--ciudad-bg),rgba(234,223,187,.25));border-radius:5px;padding-left:10px}
+.stop.ciudad .t{color:var(--ciudad)}
+.stop.ruta{background:linear-gradient(90deg,var(--ruta-bg),rgba(220,229,204,.25));border-radius:5px;padding-left:10px}
+.stop.agua{background:linear-gradient(90deg,var(--agua-bg),rgba(198,224,226,.25));border-radius:5px;padding-left:10px}
+.stop.agua h3{font-family:"Spectral",Georgia,serif;font-style:italic;font-weight:500;color:var(--agua);font-size:18px}
+.stop.agua .t{color:var(--agua)}
+
+.ctrl{display:none;gap:4px;margin-top:8px;flex-wrap:wrap}
+body.editing .ctrl{display:flex}
+.ctrl button{appearance:none;cursor:pointer;border:1px solid var(--line-2);background:#fff;color:var(--ink-2);border-radius:5px;font-size:12px;line-height:1;padding:5px 8px;font-family:"Archivo Narrow",sans-serif;font-weight:600}
+.ctrl button:hover{border-color:var(--ink);color:var(--ink)}
+.ctrl button.kind{text-transform:uppercase;letter-spacing:.08em;min-width:82px}
+.ctrl button.del:hover{border-color:var(--gastro);color:var(--gastro)}
+.addrow{display:none;margin-top:14px;gap:8px;flex-wrap:wrap}
+body.editing .addrow{display:flex}
+
+body.editing [contenteditable]{outline:1px dashed var(--line-2);outline-offset:3px;border-radius:2px}
+body.editing [contenteditable]:focus{outline:1.5px solid var(--agua);background:#fff}
+
+.empty{margin:26px 0 0;padding:20px;border:1px dashed var(--line-2);border-radius:7px;color:var(--ink-2);font-size:15px;text-align:center}
+.empty b{font-weight:600;color:var(--ink)}
+
+.poolhead{margin-bottom:4px}
+.poolhead h2{font-size:24px;font-weight:600;margin:0 0 4px}
+.poolhead p{margin:0 0 16px;color:var(--ink-2);font-size:14.5px;max-width:52ch}
+.pool-grid{display:grid;gap:18px}
+@media(min-width:760px){.pool-grid{grid-template-columns:1fr 1fr}}
+.loose{border:1px dashed var(--line-2);border-radius:7px;background:#fff;padding:18px 16px 20px}
+.loose h3{margin:0 0 2px;font-size:19px;font-weight:600}
+.loose .lede{margin:0 0 4px;color:var(--ink-2);font-size:14px}
+.loose .km{font-family:"Archivo Narrow",sans-serif;font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.12em;color:var(--ink-3);margin:0}
+.loose .stops{margin-top:14px}
+.loose .stop{grid-template-columns:66px 1fr;gap:10px;padding:11px 8px 11px 0}
+.loose .stop.agua,.loose .stop.ciudad,.loose .stop.ruta{padding-left:8px}
+.loose .stop h3{font-size:15.5px}
+.loose .stop p{font-size:13.5px}
+.loose-foot{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:16px;padding-top:14px;border-top:1px solid var(--line)}
+select.assign{font-family:"Archivo Narrow",sans-serif;font-weight:600;font-size:13px;padding:7px 10px;border-radius:99px;border:1px solid var(--agua);background:#fff;color:var(--agua);cursor:pointer}
+.mini{appearance:none;cursor:pointer;border:1px solid var(--line-2);background:transparent;color:var(--ink-3);border-radius:99px;font-family:"Archivo Narrow",sans-serif;font-weight:600;font-size:12px;text-transform:uppercase;letter-spacing:.08em;padding:6px 12px}
+.mini:hover{color:var(--ink);border-color:var(--ink)}
+
+.note{margin-top:26px;padding:15px 16px;border-left:3px solid var(--agua);background:rgba(198,224,226,.35);border-radius:0 5px 5px 0;font-size:14.5px}
+
+#remindersSection{margin-top:22px}
+#remindersSection h2{font-size:20px;font-weight:600;margin:0 0 4px}
+.reminders{list-style:none;margin:14px 0 0;padding:0}
+.rem{display:flex;align-items:flex-start;gap:11px;padding:11px 0;border-top:1px solid var(--line)}
+.rem:first-child{border-top:none}
+.rem .dot{width:6px;height:6px;border-radius:99px;background:var(--agua);margin-top:9px;flex:none}
+.rem div{flex:1;font-size:14.5px;color:var(--ink-2);line-height:1.5}
+.rem .remdel{display:none;flex:none;appearance:none;cursor:pointer;border:1px solid var(--line-2);background:#fff;color:var(--ink-3);border-radius:5px;font-size:12px;padding:5px 8px;font-family:"Archivo Narrow",sans-serif;font-weight:600}
+.rem .remdel:hover{border-color:var(--gastro);color:var(--gastro)}
+body.editing .rem .remdel{display:inline-flex}
+footer{margin-top:34px;font-size:13px;color:var(--ink-3);text-align:center}
+
+@media(max-width:600px){
+  .wrap{padding:20px 14px 56px}
+  .panel{padding:20px 14px 24px;border-radius:7px}
+  .dayhead{flex-direction:column;gap:10px}
+  .sounding{text-align:left}
+  .sounding b{font-size:28px}
+  .status{margin-left:0;width:100%}
+}
+@media print{
+  .tabs,.bar,.hint,.ctrl,.addrow,.loose-foot{display:none!important}
+  .panel[hidden]{display:block!important}
+  .panel{page-break-after:always;border-radius:7px;margin-bottom:16px}
+  body{background:#fff}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="mast">
+    <p class="eyebrow">La Bañeza · Peñíscola</p>
+    <h1>5 días</h1>
+    <div class="mast-meta">
+      <span>31 ago – 4 sep <b>2026</b></span>
+      <span>4 noches · <b>ZT Peñíscola Plaza Suites</b></span>
+      <span>Total <b id="tripTotal">0</b> km</span>
+    </div>
+  </header>
+
+  <div class="bar">
+    <button class="btn" id="edit" type="button">Editar plan</button>
+    <button class="btn ghost" id="poolBtn" type="button">Planificador de días</button>
+    <button class="btn ghost" id="snapshot" type="button">Guardar copia</button>
+    <button class="btn ghost" id="history" type="button">Restaurar versión</button>
+    <span class="status" id="status"><i class="dot"></i><span id="statusTxt">Cargando…</span></span>
+  </div>
+
+  <div class="setup" id="historyPanel" hidden>
+    <h3>Restaurar una versión anterior</h3>
+    <p id="historyEmpty">Aún no hay copias guardadas. Usad <b>Guardar copia</b> antes de un cambio grande para poder volver atrás si hace falta.</p>
+    <div id="historyList"></div>
+  </div>
+
+  <div class="hint">
+    Toca cualquier hora, título o descripción para reescribirlo. Con los botones de cada parada la mueves, la borras o cambias su tipo. En <b>Planificador de días</b> hay días completos guardados: asignad cada uno al día que queráis. Cada cambio se autoguarda solo; pulsad <b>Guardar copia</b> antes de tocar algo importante para poder deshacerlo luego desde <b>Restaurar versión</b>.
+  </div>
+
+  <div class="key">
+    <span><i class="sw-ciudad"></i> Ciudad</span>
+    <span><i class="sw-ruta"></i> Ruta a pie</span>
+    <span><i class="sw-agua"></i> <em>Agua</em></span>
+    <span><i class="sw-gastro"></i> Gastronómico</span>
+    <span><i class="sw-coche"></i> Carretera</span>
+  </div>
+
+  <div class="tabs" role="tablist" aria-label="Días del viaje"></div>
+  <div id="panels"></div>
+  <section class="panel" id="poolSection" hidden></section>
+
+  <section class="panel" id="remindersSection">
+    <h2>Para recordar</h2>
+    <ul class="reminders" id="remindersList"></ul>
+    <div class="addrow"><button class="btn ghost" type="button" id="addRem">+ Añadir recordatorio</button></div>
+  </section>
+
+  <footer>Media pensión: desayuno 7:30–10:30 · cena 20:00–22:15.</footer>
+</div>
+
+<script type="application/json" id="plan">
+{
+ "days":[
+  {"id":"lun","dow":"Lun","date":"31 ago","title":"La Bañeza → Peñíscola por el Monasterio de Piedra","lede":"El día duro del viaje: 870 km partidos en dos por un parque de cascadas. Madrugón de verdad.","km":"860","stops":[
+   {"t":"04:00","n":"Salida de La Bañeza","d":"Repostad la víspera. Las tres primeras horas van vacías.","k":"coche","km":"860"},
+   {"t":"07:00","n":"Desayuno en Soria","d":"Mitad de camino y con los bares ya abiertos.","k":"gastro"},
+   {"t":"09:15","n":"Monasterio de Piedra","d":"Aparcamiento gratuito. El parque abre a las 9:00. Entradas compradas online.","k":"ciudad"},
+   {"t":"09:30","n":"El parque de las cascadas","d":"5 km de recorrido: Cola de Caballo y Gruta del Iris. Escaleras, túneles y salpicaduras: calzado cerrado.","k":"agua"},
+   {"t":"12:15","n":"Claustro cisterciense","d":"Sala capitular, refectorio y museo del vino.","k":"ciudad"},
+   {"t":"13:00","n":"Comida en Nuévalos","d":"En el recinto o en el pueblo. Sin alargarse: quedan 390 km.","k":"gastro"},
+   {"t":"14:00","n":"Rumbo a Peñíscola","d":"Por Calatayud, Zaragoza y Alcañiz.","k":"coche"},
+   {"t":"16:35","n":"Café en Alcañiz","d":"Parada obligatoria aunque no apetezca. Es el tramo de más sueño.","k":"coche"},
+   {"t":"18:30","n":"Primer baño en la playa Norte","d":"Llegada, check-in y al agua para quitarse nueve horas de coche.","k":"agua"},
+   {"t":"20:30","n":"Cena en el hotel","d":"El comedor cierra a las 22:15.","k":"gastro"}
+  ]},
+  {"id":"mar","dow":"Mar","date":"1 sep","title":"Sin asignar","lede":"Este día está libre a propósito. Elegir entre los planes del planificador de días.","km":"—","stops":[]},
+  {"id":"mie","dow":"Mié","date":"2 sep","title":"Sin asignar","lede":"Este día está libre a propósito. Elegir entre los planes del planificador de días.","km":"—","stops":[]},
+  {"id":"jue","dow":"Jue","date":"3 sep","title":"Sin asignar","lede":"Este día está libre a propósito. Elegir entre los planes del planificador de días.","km":"—","stops":[],
+   "note":"Con viento del norte o mar de fondo, el kayak se convierte en un sufrimiento y toca monte. Si elegís agua, llamad con un día de margen para reservar tabla o barco."},
+  {"id":"vie","dow":"Vie","date":"4 sep","title":"Vuelta a casa por Morella","lede":"Check-out adelantado. Morella no cuesta ni un kilómetro extra y parte en dos un regreso de 780 km.","km":"780","stops":[
+   {"t":"07:30","n":"Último baño y desayuno","d":"Antes de cargar el coche.","k":"agua","km":"780"},
+   {"t":"08:30","n":"Check-out y salida","d":"Adelantadlo: con salida a las 11:30 llegaríais a casa cerca de medianoche.","k":"coche"},
+   {"t":"09:30","n":"Morella","d":"Murallas, castillo sobre la mola y basílica. Aparcad fuera del recinto.","k":"ciudad"},
+   {"t":"12:30","n":"Comida en Morella","d":"Trufa, cordero y flaons de postre.","k":"gastro"},
+   {"t":"13:45","n":"Salida hacia casa","d":"700 km por Alcañiz, Zaragoza y Soria. Rechazad la AP-68 si el navegador la propone.","k":"coche"},
+   {"t":"17:00","n":"Parada larga","d":"Cambio de conductor y café. Es la hora crítica.","k":"coche"},
+   {"t":"21:30","n":"Llegada a La Bañeza","d":"Casa antes de que sea noche cerrada.","k":"coche"}
+  ]}
+ ],
+ "pool":[
+  {"title":"Sierra de Irta y el castillo del Papa Luna","lede":"Mañana de acantilados a pie, baño en calas sin sombrillas y el castillo cuando afloja el sol.","km":"85","stops":[
+   {"t":"07:30","n":"Desayuno","d":"Justo a la apertura del bufé.","k":"gastro","km":"85"},
+   {"t":"08:15","n":"Sierra de Irta","d":"Coche hasta Font Nova, donde acaba el asfalto. El resto andando: en verano la pista está cerrada al tráfico.","k":"ruta"},
+   {"t":"09:45","n":"Torre Badum","d":"Unos 4 km de subida suave, con el peñón de fondo. Poca sombra.","k":"ruta"},
+   {"t":"11:00","n":"Baño en las calas de Irta","d":"Agua limpia y sin nadie. Llevad gafas de snorkel y agua para beber.","k":"agua"},
+   {"t":"14:00","n":"Comida en Alcossebre","d":"Arroz marinero al otro lado de la sierra.","k":"gastro"},
+   {"t":"16:30","n":"Vuelta al hotel","d":"Ducha y siesta en las horas de más calor.","k":"coche"},
+   {"t":"18:00","n":"Castillo del Papa Luna","d":"Diez minutos en coche. Cierra a las 21:30 y la taquilla, antes.","k":"ciudad"},
+   {"t":"19:45","n":"Casco antiguo al atardecer","d":"Calle Mayor, el Bufador, el faro y el paseo de ronda. Ocaso sobre las 20:45.","k":"ciudad"},
+   {"t":"21:15","n":"Cena en el hotel","d":"De vuelta con margen de sobra.","k":"gastro"}
+  ]},
+  {"title":"Un río bajo tierra y una playa al mediodía","lede":"El río subterráneo navegable más largo de Europa por la mañana, el Mediterráneo al mediodía y un castillo templario al caer la tarde.","km":"245","stops":[
+   {"t":"07:30","n":"Desayuno y salida","d":"130 km hacia el sur por la AP-7, sin peaje.","k":"coche","km":"245"},
+   {"t":"09:35","n":"Coves de Sant Josep","d":"Presentaos 10 minutos antes de la franja reservada. Aforo limitado.","k":"ciudad"},
+   {"t":"09:45","n":"El río subterráneo","d":"800 m en barca y 255 a pie. Dentro hay 20 grados constantes: llevad manga larga.","k":"agua"},
+   {"t":"12:00","n":"Playa de la Concha, Oropesa","d":"Baño en las horas de más calor, con la Torre del Rey al lado.","k":"agua"},
+   {"t":"14:00","n":"Comida frente al mar","d":"En el paseo de Oropesa, sin prisa.","k":"gastro"},
+   {"t":"17:30","n":"Castillo de Xivert","d":"Ruinas templarias sobre un risco, 20 minutos de subida a pie. Mucho mejor con el sol bajo.","k":"ruta"},
+   {"t":"19:15","n":"Circuito de spa","d":"16 € por persona. Pedid la cita en recepción el lunes al llegar.","k":"agua"},
+   {"t":"20:45","n":"Cena en el hotel","d":"Sin prisa después del spa.","k":"gastro"}
+  ]},
+  {"title":"El Maestrazgo","lede":"Pueblos de piedra, una ermita metida en la roca y pozas de río.","km":"227","stops":[
+   {"t":"07:30","n":"Desayuno y salida","d":"Día largo: salid puntuales.","k":"coche","km":"227"},
+   {"t":"09:00","n":"Sant Mateu","d":"Capital histórica del Maestrat, con plaza porticada.","k":"ciudad"},
+   {"t":"10:45","n":"Catí","d":"Casco medieval intacto y casi sin turismo.","k":"ciudad"},
+   {"t":"13:00","n":"Santuario de la Balma","d":"Ermita encajada bajo un farallón, colgada sobre el valle.","k":"ruta"},
+   {"t":"13:30","n":"Pozas del río Bergantes","d":"Zonas de baño junto a la carretera de Aguaviva, a pocos metros del coche. En septiembre el río puede ir justo: preguntad en el pueblo.","k":"agua"},
+   {"t":"14:45","n":"Comida en Forcall","d":"Cocina de Els Ports, contundente y barata.","k":"gastro"},
+   {"t":"16:30","n":"Regreso","d":"Hora y media larga de curvas. Mejor con luz.","k":"coche"},
+   {"t":"20:30","n":"Cena en el hotel","d":"","k":"gastro"}
+  ]},
+  {"title":"Día de agua en Peñíscola","lede":"Cero carretera. El castillo visto desde el mar, que es como no lo habéis visto.","km":"40","stops":[
+   {"t":"08:00","n":"Desayuno","d":"Sin prisa por una vez.","k":"gastro","km":"40"},
+   {"t":"09:30","n":"Kayak o paddle por el peñón","d":"A primera hora el mar va plano. La playa Norte está protegida por la propia roca.","k":"agua"},
+   {"t":"12:00","n":"Snorkel en la playa Sur","d":"Bahía natural al abrigo del castillo, más recogida que la Norte.","k":"agua"},
+   {"t":"14:00","n":"Langostinos en Vinaròs","d":"Veinte minutos por la costa. Es el motivo por el que la gente para en Vinaròs.","k":"gastro"},
+   {"t":"17:00","n":"Barco a las calas de Irta","d":"Llegar por mar a donde el martes fuisteis andando.","k":"agua"},
+   {"t":"20:15","n":"Cena en el hotel","d":"","k":"gastro"},
+   {"t":"21:30","n":"Murallas iluminadas","d":"Diez minutos en coche. El mejor cierre del viaje.","k":"ciudad"}
+  ]},
+  {"title":"Tarragona y Tortosa","lede":"El plan de ciudad que no tenéis. Anfiteatro romano al borde del mar y comida en el barrio de pescadores.","km":"285","stops":[
+   {"t":"07:30","n":"Desayuno y salida","d":"1h20 por la AP-7, sin peaje en ese tramo.","k":"coche","km":"285"},
+   {"t":"09:00","n":"Tarragona romana","d":"Anfiteatro sobre el mar, circo bajo la ciudad y murallas. Patrimonio de la Humanidad.","k":"ciudad"},
+   {"t":"12:00","n":"Baño en la playa del Miracle","d":"Está justo debajo del anfiteatro, a pie desde el centro.","k":"agua"},
+   {"t":"14:00","n":"Comida en el Serrallo","d":"Barrio de pescadores, pescado del día.","k":"gastro"},
+   {"t":"16:30","n":"Tortosa","d":"Catedral, castillo de la Suda y barrio judío. Os pilla de camino a la vuelta.","k":"ciudad"},
+   {"t":"20:15","n":"Cena en el hotel","d":"","k":"gastro"}
+  ]}
+ ],
+ "reminders":[
+  "Comprad las entradas del Monasterio de Piedra y de las Coves de Sant Josep online, con antelación.",
+  "Llevad calzado cerrado para el Monasterio de Piedra y algo de manga larga para las Coves de Sant Josep, que están a 20 grados.",
+  "El parking del hotel ronda los 18 €/noche; mirad si hay hueco gratis en las calles de detrás.",
+  "Pedid la cita del spa en recepción el lunes, al hacer el check-in.",
+  "Evitad el peaje de la AP-68 entre Zaragoza y Logroño: id por Soria, tarda casi lo mismo.",
+  "Revisad presión de neumáticos y niveles antes de salir; contad con tres repostajes largos y uno corto.",
+  "Si elegís el día de agua del jueves, llamad con un día de margen para reservar kayak o barco.",
+  "El comedor del hotel cierra a las 22:15 y el desayuno abre a las 7:30."
+ ]
+}
+</script>
+
+<script>
+// URL de tu aplicación web de Apps Script, ya fija.
+const ENDPOINT = 'https://script.google.com/macros/s/AKfycbyC8sVWstyKm-BaIkJIVWnx9ERruRMj4fka2e9cgbcnxIK2tEXehgT7tXVFIkSVfFH7Cg/exec';
+const TOKEN = 'peniscola2026';
+
+const ORIGINAL=document.getElementById('plan').textContent;
+const KINDS=['ciudad','ruta','agua','gastro','coche'];
+const KINDNAME={ciudad:'Ciudad',ruta:'Ruta',agua:'Agua',gastro:'Gastronómico',coche:'Carretera'};
+const CACHE_KEY='viaje-peniscola-cache';
+let PLAN, current=0, saveTimer=null;
+
+function cache(){ try{ return localStorage.getItem(CACHE_KEY) }catch(e){ return null } }
+function setCache(s){ try{ localStorage.setItem(CACHE_KEY,s) }catch(e){} }
+function setStatus(kind,txt){
+  const el=document.getElementById('status');
+  el.className='status '+kind;
+  document.getElementById('statusTxt').textContent=txt;
+}
+function esc(s){ return String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;') }
+function clone(x){ return JSON.parse(JSON.stringify(x)) }
+function listOf(src,idx){ return src==='pool' ? PLAN.pool[idx].stops : PLAN.days[idx].stops }
+function objOf(src,idx){ return src==='pool' ? PLAN.pool[idx] : PLAN.days[idx] }
+
+// Devuelve 'ok' si la hoja tenía datos, 'empty' si respondió pero sin días,
+// o 'fail' si no se pudo contactar con la hoja.
+async function pull(showBusy){
+  if(showBusy) setStatus('busy','Cargando de la hoja…');
+  try{
+    const r=await fetch(ENDPOINT+'?t='+Date.now());
+    const j=await r.json();
+    const hasDays = j && Array.isArray(j.days) && j.days.length>0;
+    if(hasDays){
+      PLAN=j; if(!PLAN.pool) PLAN.pool=[];
+      setCache(JSON.stringify(PLAN));
+      setStatus('ok','Sincronizado con la hoja');
+      return 'ok';
+    }
+    return 'empty';
+  }catch(err){
+    const c=cache();
+    PLAN = c ? JSON.parse(c) : JSON.parse(ORIGINAL);
+    setStatus('warn','Sin conexión · mostrando última copia');
+    return 'fail';
+  }
+}
+// snapshot=false (autoguardado normal): solo sobrescribe el plan vivo.
+// snapshot=true (botón "Guardar copia"): antes de escribir, el servidor
+// empuja lo que hubiera hacia el historial, desplazando lo anterior una fila.
+async function push(snapshot){
+  setStatus('busy', snapshot?'Guardando copia…':'Guardando…');
+  try{
+    await fetch(ENDPOINT,{
+      method:'POST',
+      headers:{'Content-Type':'text/plain;charset=utf-8'},
+      body:JSON.stringify({token:TOKEN,plan:PLAN,snapshot:!!snapshot})
+    });
+    setCache(JSON.stringify(PLAN));
+    setStatus('ok', snapshot?'Copia guardada en el historial':'Guardado y sincronizado');
+  }catch(err){
+    setCache(JSON.stringify(PLAN));
+    setStatus('warn','No se pudo subir · guardado local');
+  }
+}
+function persist(){
+  clearTimeout(saveTimer);
+  saveTimer=setTimeout(()=>push(false),500);
+}
+function fmtDate(d){
+  try{ return new Date(d).toLocaleString('es-ES',{dateStyle:'medium',timeStyle:'short'}) }
+  catch(e){ return String(d) }
+}
+async function loadHistory(){
+  const list=document.getElementById('historyList'), empty=document.getElementById('historyEmpty');
+  list.innerHTML=''; empty.textContent='Cargando…'; empty.style.display='block';
+  try{
+    const r=await fetch(ENDPOINT+'?mode=history&t='+Date.now());
+    const j=await r.json();
+    const items=(j.history||[]).slice().reverse(); // más reciente primero
+    if(!items.length){ empty.textContent='Aún no hay copias guardadas. Usad "Guardar copia" antes de un cambio grande para poder volver atrás si hace falta.'; return; }
+    empty.style.display='none';
+    const ul=document.createElement('ul'); ul.className='vlist';
+    items.forEach(it=>{
+      const li=document.createElement('li'); li.className='vrow';
+      li.innerHTML=`<span>${esc(fmtDate(it.date))}</span><button type="button" data-restore="${it.row}">Restaurar</button>`;
+      ul.appendChild(li);
+    });
+    list.appendChild(ul);
+  }catch(err){
+    empty.textContent='No se ha podido cargar el historial ahora mismo.';
+  }
+}
+async function restoreVersion(row){
+  if(!confirm('Esto sustituye el plan actual por esa versión antigua. Lo que hay ahora se guarda como copia antes de restaurar. ¿Seguir?')) return;
+  setStatus('busy','Restaurando…');
+  try{
+    const r=await fetch(ENDPOINT+'?mode=version&row='+row+'&t='+Date.now());
+    const j=await r.json();
+    if(!j || !j.days){ setStatus('warn','Esa versión no se pudo leer'); return; }
+    PLAN=j; if(!PLAN.pool) PLAN.pool=[];
+    await push(true); // guarda lo actual como copia y sube la restaurada
+    current=0; render();
+    document.getElementById('historyPanel').hidden=true;
+  }catch(err){
+    setStatus('warn','No se pudo restaurar');
+  }
+}
+
+function stopHTML(s,src,idx,i){
+  return `<li class="stop ${s.k}" data-src="${src}" data-idx="${idx}" data-i="${i}">
+    <div class="tcol">
+      <div class="t" contenteditable="false" data-f="t">${esc(s.t)}</div>
+      <div class="km" contenteditable="false" data-f="km">${esc(s.km||'')}</div>
+    </div>
+    <div>
+      <h3 contenteditable="false" data-f="n">${esc(s.n)}</h3>
+      <p contenteditable="false" data-f="d">${esc(s.d)}</p>
+      <div class="ctrl">
+        <button type="button" data-a="up" title="Subir">↑</button>
+        <button type="button" data-a="down" title="Bajar">↓</button>
+        <button type="button" data-a="kind" class="kind">${KINDNAME[s.k]||s.k}</button>
+        <button type="button" data-a="del" class="del">Borrar</button>
+      </div>
+    </div>
+  </li>`;
+}
+function listHTML(stops,src,idx){
+  const rows = (stops&&stops.length)
+    ? `<ul class="stops">${stops.map((s,i)=>stopHTML(s,src,idx,i)).join('')}</ul>`
+    : (src==='pool'?'':`<p class="empty">Este día está <b>sin planificar</b>. Abre <b>Planificador de días</b> y asígnale uno.</p>`);
+  return rows+`<div class="addrow"><button class="btn ghost" type="button" data-add="${src}" data-addi="${idx}">+ Añadir parada</button>
+    ${src==='day'?`<button class="btn ghost" type="button" data-tosuelto="${idx}">Guardar como día suelto</button>`:''}</div>`;
+}
+function fieldsHTML(src,idx){ return `data-src="${src}" data-idx="${idx}"`; }
+
+function render(){
+  const tabs=document.querySelector('.tabs'), panels=document.getElementById('panels');
+  tabs.innerHTML=''; panels.innerHTML='';
+
+  PLAN.days.forEach((day,i)=>{
+    const b=document.createElement('button');
+    b.className='tab'; b.type='button'; b.setAttribute('role','tab');
+    b.setAttribute('aria-selected', i===current?'true':'false');
+    b.tabIndex=i===current?0:-1;
+    b.innerHTML=`<b>${esc(day.dow)}</b><small>${esc(day.date)}</small>`;
+    tabs.appendChild(b);
+
+    const p=document.createElement('section');
+    p.className='panel'; p.setAttribute('role','tabpanel');
+    if(i!==current) p.hidden=true;
+    let body=listHTML(day.stops||[],'day',i);
+    if(day.note) body+=`<div class="note" contenteditable="false" ${fieldsHTML('day',i)} data-f="note">${esc(day.note)}</div>`;
+    p.innerHTML=`
+      <div class="dayhead">
+        <div>
+          <h2 contenteditable="false" ${fieldsHTML('day',i)} data-f="title">${esc(day.title)}</h2>
+          <p contenteditable="false" ${fieldsHTML('day',i)} data-f="lede">${esc(day.lede)}</p>
+        </div>
+        <div class="sounding">
+          <b data-daytotal="${i}">0</b>
+          <small>km de coche</small>
+        </div>
+      </div>${body}`;
+    panels.appendChild(p);
+  });
+
+  applyEditable();
+  recalcTotals();
+  renderReminders();
+}
+function renderPool(){
+  const pp=document.getElementById('poolSection');
+  const opts=PLAN.days.map((d,i)=>`<option value="${i}">${esc(d.dow)} ${esc(d.date)}</option>`).join('');
+  pp.innerHTML=`
+    <div class="poolhead">
+      <h2>Planificador de días</h2>
+      <p>Días completos sin fecha fija. Asignad cada uno al día que queráis; sustituirá lo que hubiera ese día.</p>
+      <button class="btn" type="button" id="newday">+ Crear día</button>
+    </div>
+    <div class="pool-grid">${PLAN.pool.map((o,i)=>`
+      <div class="loose">
+        <h3 contenteditable="false" data-src="pool" data-idx="${i}" data-f="title">${esc(o.title)}</h3>
+        <p class="lede" contenteditable="false" data-src="pool" data-idx="${i}" data-f="lede">${esc(o.lede)}</p>
+        <p class="km"><span data-pooltotal="${i}">0</span> km de coche</p>
+        ${listHTML(o.stops,'pool',i)}
+        <div class="loose-foot">
+          <select class="assign" data-assign="${i}">
+            <option value="">Asignar a…</option>${opts}
+          </select>
+          <button class="mini" type="button" data-dup="${i}">Duplicar</button>
+          <button class="mini" type="button" data-delpool="${i}">Borrar</button>
+        </div>
+      </div>`).join('')}</div>`;
+  applyEditable();
+  recalcTotals();
+}
+function sumKm(list){ return (list||[]).reduce((s,x)=>s+(parseFloat(x.km)||0),0); }
+function recalcTotals(){
+  PLAN.days.forEach((d,i)=>{
+    const el=document.querySelector(`[data-daytotal="${i}"]`);
+    if(el) el.textContent = (d.stops&&d.stops.length) ? sumKm(d.stops).toLocaleString('es-ES') : '—';
+  });
+  PLAN.pool.forEach((o,i)=>{
+    const el=document.querySelector(`[data-pooltotal="${i}"]`);
+    if(el) el.textContent = sumKm(o.stops).toLocaleString('es-ES');
+  });
+  const tot=PLAN.days.reduce((s,d)=>s+sumKm(d.stops),0);
+  const totEl=document.getElementById('tripTotal');
+  if(totEl) totEl.textContent = tot.toLocaleString('es-ES');
+}
+function renderReminders(){
+  const ul=document.getElementById('remindersList');
+  ul.innerHTML = (PLAN.reminders||[]).map((r,i)=>`
+    <li class="rem" data-i="${i}">
+      <span class="dot" aria-hidden="true"></span>
+      <div contenteditable="false" data-rem="${i}">${esc(r)}</div>
+      <button type="button" class="remdel" data-remdel="${i}">Borrar</button>
+    </li>`).join('');
+  applyEditable();
+}
+function applyEditable(){
+  const on=document.body.classList.contains('editing');
+  document.querySelectorAll('[contenteditable]').forEach(el=>el.setAttribute('contenteditable',on?'true':'false'));
+}
+
+document.addEventListener('input',e=>{
+  const el=e.target;
+  if(el.dataset&&el.dataset.rem!==undefined){
+    PLAN.reminders[+el.dataset.rem]=el.textContent.trim(); persist(); return;
+  }
+  if(!el.hasAttribute||!el.hasAttribute('data-f')) return;
+  const f=el.dataset.f, v=el.textContent.trim();
+  const stop=el.closest('.stop');
+  if(stop){ listOf(stop.dataset.src,+stop.dataset.idx)[+stop.dataset.i][f]=v; if(f==='km') recalcTotals(); }
+  else if(el.dataset.src) objOf(el.dataset.src,+el.dataset.idx)[f]=v;
+  persist();
+});
+document.addEventListener('keydown',e=>{
+  if(e.key==='Enter'&&e.target.hasAttribute&&(e.target.hasAttribute('data-f')||e.target.hasAttribute('data-rem'))){ e.preventDefault(); e.target.blur(); }
+});
+
+document.addEventListener('change',e=>{
+  const sel=e.target.closest('[data-assign]');
+  if(!sel||sel.value==='') return;
+  const p=+sel.dataset.assign, d=+sel.value, src=PLAN.pool[p], day=PLAN.days[d];
+  if(day.stops&&day.stops.length&&!confirm('El '+day.dow+' '+day.date+' ya tiene plan. ¿Sustituirlo por "'+src.title+'"?')){ sel.value=''; return; }
+  day.title=src.title; day.lede=src.lede; day.stops=clone(src.stops);
+  current=d; persist();
+  togglePool(false); render();
+});
+
+document.addEventListener('click',e=>{
+  const tab=e.target.closest('.tab');
+  if(tab){ current=[...tab.parentNode.children].indexOf(tab); render(); return; }
+
+  if(e.target.id==='newday'){
+    PLAN.pool.push({title:'Día nuevo',lede:'Describid aquí de qué va.',stops:[{t:'09:00',n:'Primera parada',d:'',k:'ciudad'}]});
+    persist(); renderPool(); return;
+  }
+  if(e.target.id==='addRem'){
+    PLAN.reminders=PLAN.reminders||[]; PLAN.reminders.push('Nuevo recordatorio');
+    persist(); renderReminders(); return;
+  }
+  const remdel=e.target.closest('[data-remdel]');
+  if(remdel){ PLAN.reminders.splice(+remdel.dataset.remdel,1); persist(); renderReminders(); return; }
+  const dup=e.target.closest('[data-dup]');
+  if(dup){ const o=clone(PLAN.pool[+dup.dataset.dup]); o.title+=' (copia)'; PLAN.pool.push(o); persist(); renderPool(); return; }
+  const dp=e.target.closest('[data-delpool]');
+  if(dp){ const i=+dp.dataset.delpool; if(confirm('¿Borrar "'+PLAN.pool[i].title+'"?')){PLAN.pool.splice(i,1); persist(); renderPool();} return; }
+  const ts=e.target.closest('[data-tosuelto]');
+  if(ts){ const d=PLAN.days[+ts.dataset.tosuelto];
+    PLAN.pool.push({title:d.title,lede:d.lede,stops:clone(d.stops||[])});
+    persist(); render(); return; }
+
+  const add=e.target.closest('[data-add]');
+  if(add){ listOf(add.dataset.add,+add.dataset.addi).push({t:'00:00',n:'Nueva parada',d:'',k:'ciudad'}); persist(); refreshView(); return; }
+
+  const btn=e.target.closest('.ctrl button');
+  if(!btn) return;
+  const stop=btn.closest('.stop');
+  const src=stop.dataset.src, idx=+stop.dataset.idx, i=+stop.dataset.i;
+  const list=listOf(src,idx), a=btn.dataset.a;
+  if(a==='up'&&i>0) list.splice(i-1,0,list.splice(i,1)[0]);
+  if(a==='down'&&i<list.length-1) list.splice(i+1,0,list.splice(i,1)[0]);
+  if(a==='del'&&confirm('¿Borrar "'+list[i].n+'"?')) list.splice(i,1);
+  if(a==='kind') list[i].k=KINDS[(KINDS.indexOf(list[i].k)+1)%KINDS.length];
+  persist(); refreshView();
+});
+
+document.querySelector('.tabs').addEventListener('keydown',e=>{
+  const bs=[...e.currentTarget.children];
+  if(!bs.length) return;
+  let i=current;
+  if(e.key==='ArrowRight') i=(current+1)%bs.length;
+  else if(e.key==='ArrowLeft') i=(current-1+bs.length)%bs.length;
+  else if(e.key==='Home') i=0;
+  else if(e.key==='End') i=bs.length-1;
+  else return;
+  e.preventDefault(); current=i; render();
+  document.querySelectorAll('.tab')[i].focus();
+});
+
+document.getElementById('edit').addEventListener('click',e=>{
+  const on=document.body.classList.toggle('editing');
+  e.target.classList.toggle('on',on);
+  e.target.textContent=on?'Terminar edición':'Editar plan';
+  applyEditable();
+});
+document.getElementById('snapshot').addEventListener('click',()=>push(true));
+
+const historyPanel=document.getElementById('historyPanel');
+document.getElementById('history').addEventListener('click',async()=>{
+  historyPanel.hidden=!historyPanel.hidden;
+  if(!historyPanel.hidden) await loadHistory();
+});
+document.getElementById('historyList').addEventListener('click',e=>{
+  const b=e.target.closest('[data-restore]');
+  if(b) restoreVersion(+b.dataset.restore);
+});
+
+let poolOpen=false;
+function refreshView(){ if(poolOpen) renderPool(); else render(); }
+function togglePool(force){
+  poolOpen = typeof force==='boolean' ? force : !poolOpen;
+  document.querySelector('.tabs').hidden = poolOpen;
+  document.getElementById('panels').hidden = poolOpen;
+  document.getElementById('poolSection').hidden = !poolOpen;
+  document.getElementById('poolBtn').classList.toggle('on',poolOpen);
+  document.getElementById('poolBtn').textContent = poolOpen ? 'Ver días' : 'Planificador de días';
+  if(poolOpen) renderPool();
+}
+document.getElementById('poolBtn').addEventListener('click',()=>togglePool());
+
+window.addEventListener('focus',async()=>{
+  if(document.body.classList.contains('editing')) return;
+  const r=await pull(false);
+  if(r==='ok') refreshView();
+});
+
+(async function init(){
+  const c=cache();
+  PLAN = c ? JSON.parse(c) : JSON.parse(ORIGINAL);
+  render();
+  const r=await pull(true);
+  if(r==='empty'){
+    // La hoja aún no tiene nada: la sembramos con el plan actual.
+    setStatus('busy','Subiendo el plan a la hoja por primera vez…');
+    PLAN=JSON.parse(ORIGINAL);
+    await push(false);
+  }
+  render();
+})();
+</script>
+
+<script>
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('sw.js').catch(() => {});
+  });
+}
+</script>
+</body>
+</html>

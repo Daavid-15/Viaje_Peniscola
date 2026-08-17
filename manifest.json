@@ -1,0 +1,17 @@
+{
+  "name": "Viaje a Peñíscola",
+  "short_name": "Peñíscola",
+  "description": "Plan del viaje a Peñíscola, 31 agosto - 4 septiembre 2026",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#E7ECEA",
+  "theme_color": "#127182",
+  "lang": "es",
+  "icons": [
+    { "src": "icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "icon-512-maskable.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}
